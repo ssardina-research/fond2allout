@@ -4,7 +4,7 @@ This repo contains a script to determinize a PDDL FOND planning domain with `one
 
 In the _all-outcome determinization_, each non-deterministic action is replaced with a set of deterministic actions, each encoding one possible effect outcome of the action. A solution in the deterministic version amounts to a weak plan solution in the original FOND problem.
 
-Note this determinizer produces another PDDL FOND domain and does not deal with the problem itself, unlike the SAS-based determinizers used in other planners like [PRP](https://github.com/QuMuLab/planner-for-relevant-policies), [FONDSAT](https://github.com/tomsons22/FOND-SAT), or [CFOND-ASP](https://github.com/ssardina-research/cfond-asp) that produces a SAS encoding of the determinization of a specific instance planning problem and are based on the SAS translator in [Fast-Downard](https://github.com/aibasel/downward) classical planner.
+Note this determinizer produces another PDDL FOND domain and does not deal with the problem itself, unlike the SAS-based determinizers used in other planners like [PRP](https://github.com/QuMuLab/planner-for-relevant-policies), [FONDSAT](https://github.com/tomsons22/FOND-SAT), or [CFOND-ASP](https://github.com/ssardina-research/cfond-asp) that produces a SAS encoding of the determinization of a specific instance planning problem and are based on the SAS translator in [Fast-Downard](https://github.com/aibasel/downward) classical planner. For these determinizers that output SAS encodings, please refer to [translator-fond](https://github.com/ssardina-research/translator-fond) repo.
 
 # Pre-requisites
 
