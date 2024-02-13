@@ -6,7 +6,7 @@ In the _all-outcome determinization_, each non-deterministic action is replaced 
 
 Note this determinizer produces another PDDL FOND domain and does not deal with the problem itself, unlike the SAS-based determinizers used in other planners like [PRP](https://github.com/QuMuLab/planner-for-relevant-policies), [FONDSAT](https://github.com/tomsons22/FOND-SAT), or [CFOND-ASP](https://github.com/ssardina-research/cfond-asp) that produces a SAS encoding of the determinization of a specific instance planning problem and are based on the SAS translator in [Fast-Downard](https://github.com/aibasel/downward) classical planner. For these determinizers that output SAS encodings, please refer to [translator-fond](https://github.com/ssardina-research/translator-fond) repo.
 
-# Pre-requisites
+## Pre-requisites
 
 The script relies on the [pddl](https://github.com/AI-Planning/pddl) parser, which can be easily installed via:
 
@@ -16,20 +16,29 @@ $ pip install pddl
 
 The pddl system relies itself on the [lark](https://lark-parser.readthedocs.io/en/stable/) parsing library.
 
-# Example runs
+This repo extends pddl (in module [`fond2allout.pddl`](fond2allout/pddl)) to accept single files 
+containing both the domain and the problem instance.
 
-A simple example run is as follows:
+## Example runs
+
+The system is provided as a module `fond2allout`. To just check that the PDDL input file is parsed well, just issue the command `check` and report to console:
 
 ```shell
-$ python fond2allout.py problems/blocksworld-ipc08/domain.pddl
+$ python -m fond2allout check tests/domain_03.pddl --console
+```
+
+To perform the determinization:
+
+```shell
+$ python -m fond2allout translate tests/domain_03.pddl
 ```
 
 This will save the all-outcome deterministic PDDL version in file `domain-allout.pddl`. Deterministic versions of non-deterministic actions will be indexed with term `_DETDUP_<n>`, as done by [PRP](https://github.com/QuMuLab/planner-for-relevant-policies)'s original determinizer. The name of the determinized domain will be the original name with suffix `_ALLOUT`.
 
-To change the suffix use option `--suffix`, to change the output file use `--save`, and to get the resulting PDDL printed on console use `--print`:
+To change the suffix use option `--suffix`, to change the output file use `--save`, and to get the resulting PDDL printed on console use `--console`:
 
 ```lisp
-$ python fond2allout.py problems/blocksworld-ipc08/domain.pddl --print --suffix "VER" --save output.pddl                                                                    ─╯
+$ python -m fond2allout translate problems/blocksworld-ipc08/domain.pddl --console --suffix "VER" --save output.pddl
 (define (domain blocks-domain_ALLOUT)
     (:requirements :equality :typing)
     (:types block)
@@ -63,6 +72,14 @@ $ python fond2allout.py problems/blocksworld-ipc08/domain.pddl --print --suffix 
 ```
 
 Note this resulting PDDL domain is now deterministic and can then be used as input to the original [Fast-Downard](https://github.com/aibasel/downward) SAS translator.
+
+Finally, the script `fond2allout.py` provides a high-level script interface to the module:
+
+```shell
+$ python fond2allout.py tests/domain_03.pddl --console
+ ```
+
+ This is indeed equivalent to `python -m fond2allout translate tests/domain_03.pddl --console`
 
 ## Format allowed on effects
 

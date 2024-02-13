@@ -20,7 +20,7 @@ if __name__ == "__main__":
         help="suffix to use to annotate each deterministic version of an nd-action (Default: %(default)s)",
     )
     parser.add_argument(
-        "--print",
+        "--console",
         action="store_true",
         default=False,
         help="dump encoding to terminal too (Default: %(default)s)",
@@ -33,5 +33,5 @@ if __name__ == "__main__":
         out_pddl_file = args.save
 
 
-    translate(os.path.abspath(args.domain), args.print, args.suffix, out_pddl_file)
+    translate(os.path.abspath(args.domain), args.console, args.suffix, out_pddl_file)
 

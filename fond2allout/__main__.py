@@ -24,7 +24,7 @@ from fond2allout import translate as fond2allout_translate
 
 @click.group()
 def cli():
-    """The unquestionable parser for PDDL 3.1."""  # noqa
+    """FOND to all-outcomes lifted determinizer.""" 
 quiet_option = click.option("-q", "--quiet", is_flag=True, help="Don't print anything.")
 
 @cli.command()
