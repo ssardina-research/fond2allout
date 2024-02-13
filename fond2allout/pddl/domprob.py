@@ -90,10 +90,11 @@ class DomProbParser:
 def domprob_to_string(domprob):
     """Convert a domain and problem to a string."""
     domain, problem = domprob
-    if domain is not None:
-        print(domain_to_string(domain))
-    if problem is not None:
-        print(problem_to_string(problem))
+
+    domain_str = domain_to_string(domain) if domain is not None else None
+    problem_str = problem_to_string(problem) if problem is not None else None
+
+    return domain_str, problem_str
 
 
 

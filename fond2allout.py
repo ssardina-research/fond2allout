@@ -34,3 +34,4 @@ if __name__ == "__main__":
 
 
     translate(os.path.abspath(args.domain), args.print, args.suffix, out_pddl_file)
+

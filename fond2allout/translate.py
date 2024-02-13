@@ -6,9 +6,8 @@ import os
 from pddl.logic.effects import AndEffect
 from pddl.logic.base import And, OneOf
 from pddl.logic.predicates import Predicate
-from pddl.core import Domain, Problem, Action
+from pddl.core import Domain, Action
 from pddl.formatter import domain_to_string, problem_to_string
-
 from fond2allout.pddl import parse_domain_problem
 
 
@@ -86,37 +85,3 @@ def main(file: str, suffix="DETDUP", file_out=None) -> Domain:
 
     return allout_domain, fond_problem
 
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(
-        description="Generate lifted all-outcomes determinization of a FOND domain"
-    )
-    parser.add_argument("domain", nargs="?", help="domain PDDL file to determinize.")
-    parser.add_argument("--save", type=str, help="file to save determinized model")
-    parser.add_argument(
-        "--suffix",
-        type=str,
-        default="DETDUP",
-        help="suffix to use to annotate each deterministic version of an nd-action (Default: %(default)s)",
-    )
-    parser.add_argument(
-        "--print",
-        action="store_true",
-        default=False,
-        help="dump encoding to terminal too (Default: %(default)s)",
-    )
-    args = parser.parse_args()
-
-    base_name, _ = os.path.splitext(os.path.basename(args.domain))
-    out_pddl_file = f"{base_name}-allout.pddl"
-    if args.save:
-        out_pddl_file = args.save
-
-    allout_domain, fond_problem = main(os.path.abspath(args.domain), suffix=args.suffix, file_out=out_pddl_file)
-
-    if args.print:
-        print(domain_to_string(allout_domain))
-        if fond_problem is not None:
-            print(problem_to_string(fond_problem))
