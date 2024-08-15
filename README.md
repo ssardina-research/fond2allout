@@ -24,7 +24,7 @@ containing both the domain and the problem instance.
 The system is provided as a module `fond2allout`. To just check that the PDDL input file is parsed well, just issue the command `check` and report to console:
 
 ```shell
-$ python -m fond2allout check tests/domain_03.pddl --console
+$ python -m fond2allout check tests/domain_03.pddl
 ```
 
 To perform the determinization:

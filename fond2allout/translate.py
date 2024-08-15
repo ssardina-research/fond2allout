@@ -8,6 +8,8 @@ from pddl.logic.base import And, OneOf
 from pddl.logic.predicates import Predicate
 from pddl.core import Domain, Action
 from pddl.formatter import domain_to_string, problem_to_string
+from pddl.requirements import Requirements
+
 from fond2allout.pddl import parse_domain_problem
 
 
@@ -59,7 +61,13 @@ def translate(fond_domain: Domain, suffix="DETDUP") -> Domain:
 
     allout_domain = Domain(
         f"{fond_domain.name}_ALLOUT",
-        requirements=frozenset([r for r in fond_domain.requirements if str(r) != ":non-deterministic"]),
+        requirements=frozenset(
+            [
+                r
+                for r in fond_domain.requirements
+                if r is not Requirements.NON_DETERMINISTIC
+            ]
+        ),
         types=fond_domain.types,
         constants=fond_domain.constants,
         predicates=fond_domain.predicates,
@@ -84,4 +92,3 @@ def main(file: str, suffix="DETDUP", file_out=None) -> Domain:
                 f.write(problem_to_string(fond_problem))
 
     return allout_domain, fond_problem
-

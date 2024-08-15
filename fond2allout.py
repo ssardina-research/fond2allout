@@ -9,9 +9,11 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Generate lifted all-outcomes determinization of a FOND domain"
+        description="Generate lifted all-outcomes determinization of a FOND planning domain"
     )
-    parser.add_argument("domain", nargs="?", help="domain PDDL file to determinize.")
+    parser.add_argument(
+        "domain", nargs="?", help="(non-deterministic) PDDL domain file to determinize."
+    )
     parser.add_argument("--save", type=str, help="file to save determinized model")
     parser.add_argument(
         "--suffix",
@@ -32,6 +34,4 @@ if __name__ == "__main__":
     if args.save:
         out_pddl_file = args.save
 
-
     translate(os.path.abspath(args.domain), args.console, args.suffix, out_pddl_file)
-
