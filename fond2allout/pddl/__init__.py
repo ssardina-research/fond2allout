@@ -15,6 +15,7 @@ _all__ = ['pddl']
 """Top-level package for extending pddl parser to APP."""
 
 def parse_domain_problem(fn):
+    """This function parses a domain and/or problem PDDL file."""
     from fond2allout.pddl.domprob import DomProbParser
 
     with open(fn, "r") as f:

@@ -18,7 +18,7 @@ $ pip install pddl
 
 The pddl system library relies itself on the [lark](https://lark-parser.readthedocs.io/en/stable/) parsing library. That library already handles the `oneof` construct.
 
-The code in module [fond2allout/pddl](fond2allout/pddl) extends the pddl library to accept single files containing both the domain and the problem instance.
+The code in module [fond2allout/pddl](fond2allout/pddl) extends the pddl library to accept single files potentially containing both the domain (first) and the problem instance (a tuple `(domain, problem)` is extracted).
 
 ## Example runs
 
@@ -34,7 +34,7 @@ To perform the determinization:
 $ python -m fond2allout translate tests/domain_03.pddl
 ```
 
-This will save the all-outcome deterministic PDDL version in file `domain-allout.pddl`. Deterministic versions of non-deterministic actions will be indexed with term `_DETDUP_<n>`, as done by [PRP](https://github.com/QuMuLab/planner-for-relevant-policies)'s original determinizer. The name of the determinized domain will be the original name with suffix `_ALLOUT`.
+The all-outcome deterministic PDDL version will be saved in file `domain_03-allout.pddl`. Deterministic versions of non-deterministic actions will be indexed with term `_DETDUP_<n>`, as done by [PRP](https://github.com/QuMuLab/planner-for-relevant-policies)'s original determinizer. The name of the determinized domain will be the original name with suffix `_ALLOUT`.
 
 To change the suffix use option `--suffix`, to change the output file use `--save`, and to get the resulting PDDL printed on console use `--console`:
 
@@ -73,6 +73,14 @@ $ python -m fond2allout translate problems/blocksworld-ipc08/domain.pddl --conso
 ```
 
 Note this resulting PDDL domain is now deterministic and can then be used as input to the original [Fast-Downard](https://github.com/aibasel/downward) SAS translator.
+
+The library can also translate files containing both domain and problem; the problem will remain intact:
+
+```shell
+$ python -m fond2allout translate tests/domprob_03.pddl
+```
+
+### High-level script
 
 Finally, the script `fond2allout.py` provides a high-level script interface to the module:
 

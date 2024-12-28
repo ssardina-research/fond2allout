@@ -11,7 +11,6 @@
 #
 import os
 from fond2allout.translate import main as translate_main
-from fond2allout.pddl.domprob import domprob_to_string
 
 from pddl.formatter import domain_to_string, problem_to_string
 

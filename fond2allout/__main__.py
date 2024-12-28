@@ -17,9 +17,8 @@ import sys
 import click
 
 from fond2allout.pddl import parse_domain_problem
-from fond2allout.pddl.domprob import domprob_to_string
 from fond2allout.translate import main as translate_main
-from pddl.formatter import domain_to_string
+from pddl.formatter import domain_to_string, problem_to_string
 from fond2allout import translate as fond2allout_translate
 
 @click.group()
@@ -31,11 +30,15 @@ quiet_option = click.option("-q", "--quiet", is_flag=True, help="Don't print any
 @click.argument("file_pddl", type=click.Path(exists=True, dir_okay=False))
 @quiet_option
 def check(file_pddl, quiet):
-    """Check a PDDL domain file is correct."""
+    """Check a PDDL domain and/or problem file is correct."""
     if quiet:
         sys.stdout = open(os.devnull, "a")
-    print(domprob_to_string(parse_domain_problem(file_pddl)))
 
+    dom, prob = parse_domain_problem(file_pddl)
+    if dom:
+        print(domain_to_string(dom))
+    if prob:
+        print(problem_to_string(prob))
 
 @cli.command()
 @click.argument('file_pddl', type=click.Path(exists=True, dir_okay=False))
