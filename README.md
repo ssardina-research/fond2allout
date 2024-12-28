@@ -1,10 +1,12 @@
-# FOND All-outcome Lifted Determinizers
+# FOND All-outcome Lifted Determinizer
 
 This repo contains a script to determinize a PDDL FOND planning domain with `oneof` clauses.
 
 In the _all-outcome determinization_, each non-deterministic action is replaced with a set of deterministic actions, each encoding one possible effect outcome of the action. A solution in the deterministic version amounts to a weak plan solution in the original FOND problem.
 
-Note this determinizer produces another PDDL FOND domain and does not deal with the problem itself, unlike the SAS-based determinizers used in other planners like [PRP](https://github.com/QuMuLab/planner-for-relevant-policies), [FONDSAT](https://github.com/tomsons22/FOND-SAT), or [CFOND-ASP](https://github.com/ssardina-research/cfond-asp) that produces a SAS encoding of the determinization of a specific instance planning problem and are based on the SAS translator in [Fast-Downard](https://github.com/aibasel/downward) classical planner. For these determinizers that output SAS encodings, please refer to [translator-fond](https://github.com/ssardina-research/translator-fond) repo.
+Note this determinizer produces another PDDL FOND domain and does not deal with the problem itself, unlike the previous SAS-based determinizers used in other planners like [PRP](https://github.com/QuMuLab/planner-for-relevant-policies), [FONDSAT](https://github.com/tomsons22/FOND-SAT), or [CFOND-ASP](https://github.com/ssardina-research/cfond-asp) that produces a SAS encoding of the determinization of a specific instance planning problem and are based on the SAS translator in [Fast-Downard](https://github.com/aibasel/downward) classical planner. For these determinizers that output SAS encodings, please refer to [translator-fond](https://github.com/ssardina-research/translator-fond) repo.
+
+Project [AI-Planning/fond-utils](https://github.com/AI-Planning/fond-utils) also includes a FOND determinizer, which tries to be more general than the one in this repo, which can only deal with Unary Nondeterminism (1ND) Normal Form without conditionals (see below format)
 
 ## Pre-requisites
 
@@ -85,7 +87,7 @@ $ python fond2allout.py tests/domain_03.pddl --console
 
 The determinizer accepts effects that are a single top-level `oneof` clause or mentioned as clauses in the top-level `And` effect. As such, `oneof` should not be mentioned inside other `oneof` clauses or internal `and` clauses.
 
-If the effect is just one `oneof` clause, then it corresponds to the Unary Nondeterminism (1ND) Normal Form without conditionals in:
+If the effect is just one `oneof` clause, then it corresponds to the only in:
 
 * Jussi Rintanen: [Expressive Equivalence of Formalisms for Planning with Sensing](https://gki.informatik.uni-freiburg.de/papers/Rintanen03expr.pdf). ICAPS 2003: 185-194
 
@@ -98,6 +100,5 @@ However, the translator is able to handle more flexible formats, like:
 
 When there are many `oneof` clauses in a top-level `and` effect, the cross-product of all the `oneof` clauses will determine the deterministic actions.
 
-
-
-
+For a determinizer that can handle more general effects, see project [AI-Planning/fond-utils](https://github.com/AI-Planning/fond-utils).
+)
