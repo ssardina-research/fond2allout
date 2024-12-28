@@ -3,10 +3,9 @@ import argparse
 import itertools
 import os
 
-from pddl.logic.effects import AndEffect
 from pddl.logic.base import And, OneOf
 from pddl.logic.predicates import Predicate
-from pddl.core import Domain, Action
+from pddl.core import Domain, Action, Problem
 from pddl.formatter import domain_to_string, problem_to_string
 from pddl.requirements import Requirements
 
@@ -21,8 +20,8 @@ def translate(fond_domain: Domain, suffix="DETDUP") -> Domain:
     new_actions = []
     for act in fond_domain.actions:
         # collect all oneof effect of act in a list of lists oneof_effects
-        # an action should start with an AndEffect (which may have OneOf blocks) or directly with a single OneOf
-        if isinstance(act.effect, AndEffect):
+        # an action should start with an And (which may have OneOf blocks) or directly with a single OneOf
+        if isinstance(act.effect, And):
             operands = act.effect.operands
         elif isinstance(act.effect, OneOf):
             operands = [act.effect]
