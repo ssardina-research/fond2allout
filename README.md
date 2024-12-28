@@ -16,10 +16,9 @@ The script relies on the [pddl](https://github.com/AI-Planning/pddl) parser, whi
 $ pip install pddl
 ```
 
-The pddl system relies itself on the [lark](https://lark-parser.readthedocs.io/en/stable/) parsing library.
+The pddl system library relies itself on the [lark](https://lark-parser.readthedocs.io/en/stable/) parsing library. That library already handles the `oneof` construct.
 
-This repo extends pddl (in module [`fond2allout.pddl`](fond2allout/pddl)) to accept single files 
-containing both the domain and the problem instance.
+The code in module [fond2allout/pddl](fond2allout/pddl) extends the pddl library to accept single files containing both the domain and the problem instance.
 
 ## Example runs
 
@@ -100,5 +99,9 @@ However, the translator is able to handle more flexible formats, like:
 
 When there are many `oneof` clauses in a top-level `and` effect, the cross-product of all the `oneof` clauses will determine the deterministic actions.
 
-For a determinizer that can handle more general effects, see project [AI-Planning/fond-utils](https://github.com/AI-Planning/fond-utils).
+For a determinizer that can handle more general effects, see project [AI-Planning/fond-utils](https://github.com/AI-Planning/fond-utils.
 )
+
+## Contact
+
+- Sebastian Sardina (ssardina@gmail.com)
