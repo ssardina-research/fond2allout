@@ -3,7 +3,7 @@ import argparse
 import itertools
 import os
 
-from pddl.logic.base import And, OneOf
+from pddl.logic.base import And, OneOf, Not
 from pddl.logic.predicates import Predicate
 from pddl.core import Domain, Action, Problem
 from pddl.formatter import domain_to_string, problem_to_string
@@ -26,6 +26,8 @@ def translate(fond_domain: Domain, suffix="DETDUP") -> Domain:
         elif isinstance(act.effect, OneOf):
             operands = [act.effect]
         elif isinstance(act.effect, Predicate):
+            operands = [act.effect]
+        elif isinstance(act.effect, Not):
             operands = [act.effect]
         else:
             print(
