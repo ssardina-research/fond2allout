@@ -1,5 +1,8 @@
 # FOND All-outcome Lifted Determinizer
 
+> [!IMPORTANT]
+> **This code is not maintained anymore as it has been integrated into the more general [fond-utils](https://github.com/AI-Planning/fond-utils)** 
+
 This repo contains a script to determinize a PDDL FOND planning domain with `oneof` clauses.
 
 In the _all-outcome determinization_, each non-deterministic action is replaced with a set of deterministic actions, each encoding one possible effect outcome of the action. A solution in the deterministic version amounts to a weak plan solution in the original FOND problem.
