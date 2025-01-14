@@ -1,4 +1,5 @@
 (define (domain faults)
+  (:requirements :non-deterministic :typing)
  (:types operation fault)
  (:constants  f1 f2 f3 f4 f5 - fault 
               o1 o2 o3 o4 o5 - operation)
